@@ -1,1 +1,9 @@
 C:\Users\ikega\Desktop\ООП\CourseWork.git\WordTemplate\WordTemplate\bin\Debug\WordTemplate.exe.config
+C:\Users\ikega\Desktop\ООП\CourseWork.git\WordTemplate\WordTemplate\bin\Debug\WordTemplate.exe
+C:\Users\ikega\Desktop\ООП\CourseWork.git\WordTemplate\WordTemplate\bin\Debug\WordTemplate.pdb
+C:\Users\ikega\Desktop\ООП\CourseWork.git\WordTemplate\WordTemplate\obj\Debug\WordTemplate.csprojResolveAssemblyReference.cache
+C:\Users\ikega\Desktop\ООП\CourseWork.git\WordTemplate\WordTemplate\obj\Debug\WordTemplate.Form1.resources
+C:\Users\ikega\Desktop\ООП\CourseWork.git\WordTemplate\WordTemplate\obj\Debug\WordTemplate.Properties.Resources.resources
+C:\Users\ikega\Desktop\ООП\CourseWork.git\WordTemplate\WordTemplate\obj\Debug\WordTemplate.csproj.GenerateResource.Cache
+C:\Users\ikega\Desktop\ООП\CourseWork.git\WordTemplate\WordTemplate\obj\Debug\WordTemplate.exe
+C:\Users\ikega\Desktop\ООП\CourseWork.git\WordTemplate\WordTemplate\obj\Debug\WordTemplate.pdb
