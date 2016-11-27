@@ -10,6 +10,10 @@ using System.Windows.Forms;
 using System.Runtime.Serialization.Formatters;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
+
 
 namespace WordTemplate
 {
@@ -82,6 +86,46 @@ namespace WordTemplate
         public List<string> head_dep_degree = new List<string>();
         public List<string> adviser_name = new List<string>();
         public List<string> adviser_degree = new List<string>();
-   //     public List<int> year = new List<int>();
     }
+
+    public class WorkWithDock
+    {
+        public static void CreateWordprocessingDocument(string filepath)
+        {
+            using (WordprocessingDocument wordDocument =
+                WordprocessingDocument.Create(filepath, WordprocessingDocumentType.Document))
+            {
+                MainDocumentPart mainPart = wordDocument.AddMainDocumentPart();
+                mainPart.Document = new Document();
+                Body body = mainPart.Document.AppendChild(new Body());
+            }
+        }
+
+        public static void OpenAndAddTextToWordDocument(string filepath, string txt)
+        {
+            WordprocessingDocument wordprocessingDocument =
+                WordprocessingDocument.Open(filepath, true);
+            Body body = wordprocessingDocument.MainDocumentPart.Document.Body;
+            Paragraph para = body.AppendChild(new Paragraph());
+            Run run = para.AppendChild(new Run());
+            run.AppendChild(new Text(txt));
+            wordprocessingDocument.Close();
+        }
+
+        public static string ReadWordDocument(string filepath)
+        {
+            WordprocessingDocument wordprocessingDocument =
+                WordprocessingDocument.Open(filepath, true);
+            Body body = wordprocessingDocument.MainDocumentPart.Document.Body;
+            string result="";
+            foreach (Text text in body.Descendants<Text>())
+            {
+                result += text.Text.ToString();
+            }
+            wordprocessingDocument.Close();
+            return result;
+        }
+    }
+
+
 }
