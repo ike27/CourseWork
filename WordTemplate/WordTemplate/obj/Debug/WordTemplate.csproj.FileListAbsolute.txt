@@ -7,3 +7,5 @@ C:\Users\ikega\Desktop\ООП\CourseWork.git\WordTemplate\WordTemplate\obj\Debug
 C:\Users\ikega\Desktop\ООП\CourseWork.git\WordTemplate\WordTemplate\obj\Debug\WordTemplate.csproj.GenerateResource.Cache
 C:\Users\ikega\Desktop\ООП\CourseWork.git\WordTemplate\WordTemplate\obj\Debug\WordTemplate.exe
 C:\Users\ikega\Desktop\ООП\CourseWork.git\WordTemplate\WordTemplate\obj\Debug\WordTemplate.pdb
+C:\Users\ikega\Desktop\ООП\CourseWork.git\WordTemplate\WordTemplate\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\ikega\Desktop\ООП\CourseWork.git\WordTemplate\WordTemplate\bin\Debug\DocumentFormat.OpenXml.xml

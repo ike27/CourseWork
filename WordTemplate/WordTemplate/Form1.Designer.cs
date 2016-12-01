@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
@@ -57,7 +58,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button3 = new System.Windows.Forms.Button();
+            this.buttonTRY = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -76,6 +77,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.buttonTRY);
             this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.button1);
@@ -110,6 +112,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Добавление данных";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(427, 255);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 26;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -333,15 +345,15 @@
             this.tabPage2.Text = "Создание шаблона";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // buttonTRY
             // 
-            this.button3.Location = new System.Drawing.Point(427, 255);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 26;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.buttonTRY.Location = new System.Drawing.Point(455, 334);
+            this.buttonTRY.Name = "buttonTRY";
+            this.buttonTRY.Size = new System.Drawing.Size(75, 23);
+            this.buttonTRY.TabIndex = 27;
+            this.buttonTRY.Text = "buttonTRY";
+            this.buttonTRY.UseVisualStyleBackColor = true;
+            this.buttonTRY.Click += new System.EventHandler(this.button4_Click);
             // 
             // Form1
             // 
@@ -390,6 +402,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonTRY;
     }
 }
 

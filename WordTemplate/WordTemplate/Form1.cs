@@ -25,7 +25,9 @@ namespace WordTemplate
             
         }
 
-        TemplateData tdata = new TemplateData();
+        private TemplateData tdata = new TemplateData();
+        private string _contName = "";
+        private string _sdtPropId = "";
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -70,6 +72,155 @@ namespace WordTemplate
                 MessageBox.Show(t);
             }
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            using (WordprocessingDocument wordDoc = WordprocessingDocument.Open("C:\\Users\\ikega\\Desktop\\ООП", false))
+            {
+                foreach (var item in wordDoc.MainDocumentPart.Document.Body)
+                {
+                    var oo = item.Descendants<SdtProperties>();
+                    foreach (var f1 in oo)
+                    {
+                        _contName = FindPictureContainer(wordDoc, f1, ref _sdtPropId);
+                    }
+                }
+            }
+        }
+
+   
+        private string FindPictureContainer(WordprocessingDocument wdDoc, OpenXmlElement uy, ref string SdtId)
+        {
+            SdtAlias alias = uy.Elements<SdtAlias>().FirstOrDefault();
+            SdtId sdtId = uy.Elements<SdtId>().FirstOrDefault();
+            Tag tag = uy.Elements<Tag>().FirstOrDefault();
+
+            string _tag = "";
+            string _sdtId = "";
+            string _alias = "";
+
+            //Получаем тег контейнера
+            if (tag != null)
+                _tag = tag.Val;
+
+            //Получаем ID контейнера
+            if (sdtId != null)
+                SdtId = _sdtId = sdtId.Val;
+
+            //Получаем название контейнера
+            if (alias != null)
+                _alias = alias.Val;
+
+            if (_tag.Contains("theme"))
+            {
+                
+                    var sdtBlock = wdDoc.MainDocumentPart.Document.Descendants<SdtBlock>()
+                                .Where(r => r.SdtProperties.GetFirstChild<SdtId>().Val == _sdtId);
+                   
+                
+                
+            }
+            return _alias;
+        }
+
+
+        #region Image methods
+        public static ImagePartType GetImagePartTypeFromFileName(string fileName)
+        {
+            ImagePartType io;
+            switch (Path.GetExtension(fileName.ToLower()))
+            {
+                case ".bmp":
+                    io = ImagePartType.Bmp;
+                    break;
+                case ".jpeg":
+                case ".jpg":
+                    io = ImagePartType.Jpeg;
+                    break;
+                case ".png":
+                    io = ImagePartType.Png;
+                    break;
+                default:
+                    throw new Exception("Загружен неверный формат файла!");
+            }
+            return io;
+        }
+        private static void ResizePictureContainer(Drawing d, int originalWidth, int originalHeight, ref int maxWidth, ref int maxHeight)
+        {
+            Extent imageSizeProps = d.Descendants<Extent>().FirstOrDefault();
+
+            if (imageSizeProps != null)
+            {
+                int imageWidthOr = (int)(imageSizeProps.Cx / 9525);
+                int imageHeightOr = (int)(imageSizeProps.Cy / 9525);
+                maxWidth = imageWidthOr;
+                maxHeight = imageHeightOr;
+                //Определяем соотношение сторон
+                double aspectRatio = (double)originalWidth / (double)originalHeight;
+
+                //Проверяем, что высота изображения больше разрешенной высоты
+                int newHeight = (originalHeight > imageHeightOr) ? imageHeightOr : originalHeight;
+                //Проверяем, что ширина изображения больше разрешенной ширины
+                int newWidth = (originalWidth > imageWidthOr) ? imageWidthOr : originalWidth;
+                //Вычисляем новую высоту или ширину в зависимости от соотношения сторон (полагаясь на ориентацию изображения)
+                if ((newWidth == originalWidth) && (newHeight == originalHeight))
+                {
+                    //Если ширина больше, то ориентация книжная
+                    if (newWidth > newHeight)
+                    {
+                        //Вычисляем новую высоту умножением ширины на соотношение сторон
+                        newHeight = (int)(imageWidthOr / aspectRatio);
+                        newWidth = imageWidthOr;
+                        //в некторых случаях вычисленная высота может быть больше чем разрешенная 
+                        //поэтому нужно подвести высоту к разрешенной и пересчитать ширину
+                        if (newHeight > imageHeightOr)
+                        {
+                            newHeight = imageHeightOr;
+                            newWidth = (int)(aspectRatio * newHeight);
+                        }
+                    }
+                    else //ориентация портретная
+                    {
+                        //Вычисляем новую ширину умножением высоты на соотношение сторон
+                        newWidth = (int)(aspectRatio * imageHeightOr);
+                        newHeight = imageHeightOr;
+                    }
+                }
+                else //Если исходное изображение меньше, чем контейнер
+                {
+                    if (newWidth > newHeight)
+                    {
+                        newHeight = (int)(newWidth / aspectRatio);
+                        if (newHeight > imageHeightOr)
+                        {
+                            newHeight = imageHeightOr;
+                            newWidth = (int)(aspectRatio * newHeight);
+                        }
+                    }
+                    else
+                    {
+                        newWidth = (int)(aspectRatio * newHeight);
+                    }
+                }
+                imageSizeProps.Cx = (long)(newWidth * 9525);
+                imageSizeProps.Cy = (long)(newHeight * 9525);
+            }
+
+            Extents e2 = d.Descendants<Extents>().FirstOrDefault();
+
+            long imageWidthEmu = (long)(originalWidth * 9525);
+            long imageHeightEmu = (long)(originalHeight * 9525);
+            if (e2 != null)
+            {
+                e2.Cx = imageWidthEmu;
+                e2.Cy = imageHeightEmu;
+            }
+        }
+        #endregion
+
+       
+
+
     }
 
     [Serializable]
