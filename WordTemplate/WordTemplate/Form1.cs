@@ -22,7 +22,7 @@ namespace WordTemplate
         public Form1()
         {
             InitializeComponent();
-            
+
         }
 
         private TemplateData tdata = new TemplateData();
@@ -31,7 +31,7 @@ namespace WordTemplate
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
+
             if (textBox1.Text != "") tdata.institute.Add(textBox1.Text);
             if (textBox2.Text != "") tdata.department.Add(textBox2.Text);
             if (textBox3.Text != "") tdata.theme.Add(textBox3.Text);
@@ -42,7 +42,7 @@ namespace WordTemplate
             if (textBox8.Text != "") tdata.head_dep_name.Add(textBox8.Text);
             if (textBox9.Text != "") tdata.head_dep_degree.Add(textBox9.Text);
             if (textBox10.Text != "") tdata.adviser_name.Add(textBox10.Text);
-            if (textBox11.Text != "") tdata.adviser_degree.Add(textBox11.Text);      
+            if (textBox11.Text != "") tdata.adviser_degree.Add(textBox11.Text);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -65,7 +65,7 @@ namespace WordTemplate
             BinaryFormatter formatter = new BinaryFormatter();
             using (FileStream fs = new FileStream("template_data.dat", FileMode.OpenOrCreate))
             {
-                tdata = (TemplateData)formatter.Deserialize(fs);          
+                tdata = (TemplateData)formatter.Deserialize(fs);
             }
             foreach (string t in tdata.theme)
             {
@@ -75,208 +75,100 @@ namespace WordTemplate
 
         private void button4_Click(object sender, EventArgs e)
         {
-            using (WordprocessingDocument wordDoc = WordprocessingDocument.Open("C:\\Users\\ikega\\Desktop\\ООП", false))
+            using (WordprocessingDocument wordDoc = WordprocessingDocument.Open("C:\\Users\\ikega\\Desktop\\ООП\\kurs1.docx", true)){ 
+            foreach (var item in wordDoc.MainDocumentPart.Document.Body)
             {
-                foreach (var item in wordDoc.MainDocumentPart.Document.Body)
+                var oo = item.Descendants<SdtProperties>();
+                foreach (var f1 in oo)
                 {
-                    var oo = item.Descendants<SdtProperties>();
-                    foreach (var f1 in oo)
+                    Tag tag = f1.Elements<Tag>().FirstOrDefault();
+                    string _tag = "";
+
+                    if (tag != null) _tag = tag.Val;
+
+                    if (_tag.Contains("_institute")) // #1
                     {
-                        _contName = FindPictureContainer(wordDoc, f1, ref _sdtPropId);
+                        SdtElement element = wordDoc.MainDocumentPart.Document.Body.Descendants<SdtElement>().FirstOrDefault(sdt => sdt.SdtProperties.GetFirstChild<Tag>()?.Val == _tag);
+                        element.Descendants<Text>().First().Text = textBox1.Text;
                     }
-                }
-            }
-        }
-
-   
-        private string FindPictureContainer(WordprocessingDocument wdDoc, OpenXmlElement uy, ref string SdtId)
-        {
-            SdtAlias alias = uy.Elements<SdtAlias>().FirstOrDefault();
-            SdtId sdtId = uy.Elements<SdtId>().FirstOrDefault();
-            Tag tag = uy.Elements<Tag>().FirstOrDefault();
-
-            string _tag = "";
-            string _sdtId = "";
-            string _alias = "";
-
-            //Получаем тег контейнера
-            if (tag != null)
-                _tag = tag.Val;
-
-            //Получаем ID контейнера
-            if (sdtId != null)
-                SdtId = _sdtId = sdtId.Val;
-
-            //Получаем название контейнера
-            if (alias != null)
-                _alias = alias.Val;
-
-            if (_tag.Contains("theme"))
-            {
-                
-                    var sdtBlock = wdDoc.MainDocumentPart.Document.Descendants<SdtBlock>()
-                                .Where(r => r.SdtProperties.GetFirstChild<SdtId>().Val == _sdtId);
-                   
-                
-                
-            }
-            return _alias;
-        }
-
-
-        #region Image methods
-        public static ImagePartType GetImagePartTypeFromFileName(string fileName)
-        {
-            ImagePartType io;
-            switch (Path.GetExtension(fileName.ToLower()))
-            {
-                case ".bmp":
-                    io = ImagePartType.Bmp;
-                    break;
-                case ".jpeg":
-                case ".jpg":
-                    io = ImagePartType.Jpeg;
-                    break;
-                case ".png":
-                    io = ImagePartType.Png;
-                    break;
-                default:
-                    throw new Exception("Загружен неверный формат файла!");
-            }
-            return io;
-        }
-        private static void ResizePictureContainer(Drawing d, int originalWidth, int originalHeight, ref int maxWidth, ref int maxHeight)
-        {
-            Extent imageSizeProps = d.Descendants<Extent>().FirstOrDefault();
-
-            if (imageSizeProps != null)
-            {
-                int imageWidthOr = (int)(imageSizeProps.Cx / 9525);
-                int imageHeightOr = (int)(imageSizeProps.Cy / 9525);
-                maxWidth = imageWidthOr;
-                maxHeight = imageHeightOr;
-                //Определяем соотношение сторон
-                double aspectRatio = (double)originalWidth / (double)originalHeight;
-
-                //Проверяем, что высота изображения больше разрешенной высоты
-                int newHeight = (originalHeight > imageHeightOr) ? imageHeightOr : originalHeight;
-                //Проверяем, что ширина изображения больше разрешенной ширины
-                int newWidth = (originalWidth > imageWidthOr) ? imageWidthOr : originalWidth;
-                //Вычисляем новую высоту или ширину в зависимости от соотношения сторон (полагаясь на ориентацию изображения)
-                if ((newWidth == originalWidth) && (newHeight == originalHeight))
-                {
-                    //Если ширина больше, то ориентация книжная
-                    if (newWidth > newHeight)
-                    {
-                        //Вычисляем новую высоту умножением ширины на соотношение сторон
-                        newHeight = (int)(imageWidthOr / aspectRatio);
-                        newWidth = imageWidthOr;
-                        //в некторых случаях вычисленная высота может быть больше чем разрешенная 
-                        //поэтому нужно подвести высоту к разрешенной и пересчитать ширину
-                        if (newHeight > imageHeightOr)
+                    if (_tag.Contains("_department")) // #2
                         {
-                            newHeight = imageHeightOr;
-                            newWidth = (int)(aspectRatio * newHeight);
+                        SdtElement element = wordDoc.MainDocumentPart.Document.Body.Descendants<SdtElement>().FirstOrDefault(sdt => sdt.SdtProperties.GetFirstChild<Tag>()?.Val == _tag);
+                        element.Descendants<Text>().First().Text = textBox2.Text;
                         }
-                    }
-                    else //ориентация портретная
-                    {
-                        //Вычисляем новую ширину умножением высоты на соотношение сторон
-                        newWidth = (int)(aspectRatio * imageHeightOr);
-                        newHeight = imageHeightOr;
-                    }
-                }
-                else //Если исходное изображение меньше, чем контейнер
-                {
-                    if (newWidth > newHeight)
-                    {
-                        newHeight = (int)(newWidth / aspectRatio);
-                        if (newHeight > imageHeightOr)
+                    if (_tag.Contains("_theme")) // #3
                         {
-                            newHeight = imageHeightOr;
-                            newWidth = (int)(aspectRatio * newHeight);
+                        SdtElement element = wordDoc.MainDocumentPart.Document.Body.Descendants<SdtElement>().FirstOrDefault(sdt => sdt.SdtProperties.GetFirstChild<Tag>()?.Val == _tag);
+                        element.Descendants<Text>().First().Text = textBox3.Text;
                         }
+                    if (_tag.Contains("_code")) // #4
+                        {
+                        SdtElement element = wordDoc.MainDocumentPart.Document.Body.Descendants<SdtElement>().FirstOrDefault(sdt => sdt.SdtProperties.GetFirstChild<Tag>()?.Val == _tag);
+                        element.Descendants<Text>().First().Text = textBox4.Text;
+                        }
+                    if (_tag.Contains("_specialization")) // #5
+                        {
+                        SdtElement element = wordDoc.MainDocumentPart.Document.Body.Descendants<SdtElement>().FirstOrDefault(sdt => sdt.SdtProperties.GetFirstChild<Tag>()?.Val == _tag);
+                        element.Descendants<Text>().First().Text = textBox5.Text;
                     }
-                    else
+                    if (_tag.Contains("_section")) // #6
+                        {
+                        SdtElement element = wordDoc.MainDocumentPart.Document.Body.Descendants<SdtElement>().FirstOrDefault(sdt => sdt.SdtProperties.GetFirstChild<Tag>()?.Val == _tag);
+                        element.Descendants<Text>().First().Text = textBox6.Text;
+                    }
+                    if (_tag.Contains("_student")) // #7
                     {
-                        newWidth = (int)(aspectRatio * newHeight);
+                        SdtElement element = wordDoc.MainDocumentPart.Document.Body.Descendants<SdtElement>().FirstOrDefault(sdt => sdt.SdtProperties.GetFirstChild<Tag>()?.Val == _tag);
+                        element.Descendants<Text>().First().Text = textBox7.Text;
+                    }
+                    if (_tag.Contains("_head_dep_name")) // #8
+                        {
+                        SdtElement element = wordDoc.MainDocumentPart.Document.Body.Descendants<SdtElement>().FirstOrDefault(sdt => sdt.SdtProperties.GetFirstChild<Tag>()?.Val == _tag);
+                        element.Descendants<Text>().First().Text = textBox8.Text;
+                    }
+                    if (_tag.Contains("_head_dep_degree")) // #9
+                        {
+                        SdtElement element = wordDoc.MainDocumentPart.Document.Body.Descendants<SdtElement>().FirstOrDefault(sdt => sdt.SdtProperties.GetFirstChild<Tag>()?.Val == _tag);
+                        element.Descendants<Text>().First().Text = textBox9.Text;
+                    }
+                    if (_tag.Contains("_adviser_name")) // #10
+                        {
+                        SdtElement element = wordDoc.MainDocumentPart.Document.Body.Descendants<SdtElement>().FirstOrDefault(sdt => sdt.SdtProperties.GetFirstChild<Tag>()?.Val == _tag);
+                        element.Descendants<Text>().First().Text = textBox10.Text;
+                    }
+                    if (_tag.Contains("_adviser_degree")) // #11
+                        {
+                        SdtElement element = wordDoc.MainDocumentPart.Document.Body.Descendants<SdtElement>().FirstOrDefault(sdt => sdt.SdtProperties.GetFirstChild<Tag>()?.Val == _tag);
+                        element.Descendants<Text>().First().Text = textBox11.Text;
+                    }
+                    if (_tag.Contains("_year")) // #12
+                        {
+                        SdtElement element = wordDoc.MainDocumentPart.Document.Body.Descendants<SdtElement>().FirstOrDefault(sdt => sdt.SdtProperties.GetFirstChild<Tag>()?.Val == _tag);
+                        element.Descendants<Text>().First().Text = textBox12.Text;
                     }
                 }
-                imageSizeProps.Cx = (long)(newWidth * 9525);
-                imageSizeProps.Cy = (long)(newHeight * 9525);
             }
-
-            Extents e2 = d.Descendants<Extents>().FirstOrDefault();
-
-            long imageWidthEmu = (long)(originalWidth * 9525);
-            long imageHeightEmu = (long)(originalHeight * 9525);
-            if (e2 != null)
-            {
-                e2.Cx = imageWidthEmu;
-                e2.Cy = imageHeightEmu;
+            wordDoc.Close();
             }
         }
-        #endregion
 
-       
-
+        [Serializable]
+        public class TemplateData
+        {
+            public List<string> institute = new List<string>();
+            public List<string> department = new List<string>();
+            public List<string> theme = new List<string>();
+            public List<string> code = new List<string>();
+            public List<string> specialization = new List<string>();
+            public List<string> section = new List<string>();
+            public List<string> student = new List<string>();
+            public List<string> head_dep_name = new List<string>();
+            public List<string> head_dep_degree = new List<string>();
+            public List<string> adviser_name = new List<string>();
+            public List<string> adviser_degree = new List<string>();
+        }
 
     }
-
-    [Serializable]
-    public class TemplateData
-    {
-        public List<string> institute = new List<string>();
-        public List<string> department = new List<string>();
-        public List<string> theme = new List<string>();
-        public List<string> code = new List<string>();
-        public List<string> specialization = new List<string>();
-        public List<string> section = new List<string>();
-        public List<string> student = new List<string>();
-        public List<string> head_dep_name = new List<string>();
-        public List<string> head_dep_degree = new List<string>();
-        public List<string> adviser_name = new List<string>();
-        public List<string> adviser_degree = new List<string>();
-    }
-
-    public class WorkWithDock
-    {
-        public static void CreateWordprocessingDocument(string filepath)
-        {
-            using (WordprocessingDocument wordDocument =
-                WordprocessingDocument.Create(filepath, WordprocessingDocumentType.Document))
-            {
-                MainDocumentPart mainPart = wordDocument.AddMainDocumentPart();
-                mainPart.Document = new Document();
-                Body body = mainPart.Document.AppendChild(new Body());
-            }
-        }
-
-        public static void OpenAndAddTextToWordDocument(string filepath, string txt)
-        {
-            WordprocessingDocument wordprocessingDocument =
-                WordprocessingDocument.Open(filepath, true);
-            Body body = wordprocessingDocument.MainDocumentPart.Document.Body;
-            Paragraph para = body.AppendChild(new Paragraph());
-            Run run = para.AppendChild(new Run());
-            run.AppendChild(new Text(txt));
-            wordprocessingDocument.Close();
-        }
-
-        public static string ReadWordDocument(string filepath)
-        {
-            WordprocessingDocument wordprocessingDocument =
-                WordprocessingDocument.Open(filepath, true);
-            Body body = wordprocessingDocument.MainDocumentPart.Document.Body;
-            string result="";
-            foreach (Text text in body.Descendants<Text>())
-            {
-                result += text.Text.ToString();
-            }
-            wordprocessingDocument.Close();
-            return result;
-        }
-    }
-
-
 }
+
+

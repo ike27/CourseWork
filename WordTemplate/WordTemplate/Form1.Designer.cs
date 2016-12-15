@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.buttonTRY = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -58,7 +59,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.buttonTRY = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -113,6 +113,16 @@
             this.tabPage1.Text = "Добавление данных";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // buttonTRY
+            // 
+            this.buttonTRY.Location = new System.Drawing.Point(455, 334);
+            this.buttonTRY.Name = "buttonTRY";
+            this.buttonTRY.Size = new System.Drawing.Size(75, 23);
+            this.buttonTRY.TabIndex = 27;
+            this.buttonTRY.Text = "buttonTRY";
+            this.buttonTRY.UseVisualStyleBackColor = true;
+            this.buttonTRY.Click += new System.EventHandler(this.button4_Click);
+            // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(427, 255);
@@ -154,7 +164,7 @@
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(464, 33);
+            this.textBox10.Location = new System.Drawing.Point(488, 17);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(100, 20);
             this.textBox10.TabIndex = 22;
@@ -170,7 +180,7 @@
             // 
             // textBox11
             // 
-            this.textBox11.Location = new System.Drawing.Point(397, 68);
+            this.textBox11.Location = new System.Drawing.Point(522, 53);
             this.textBox11.Name = "textBox11";
             this.textBox11.Size = new System.Drawing.Size(100, 20);
             this.textBox11.TabIndex = 20;
@@ -218,7 +228,7 @@
             // 
             // textBox8
             // 
-            this.textBox8.Location = new System.Drawing.Point(124, 286);
+            this.textBox8.Location = new System.Drawing.Point(178, 286);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(100, 20);
             this.textBox8.TabIndex = 14;
@@ -234,7 +244,7 @@
             // 
             // textBox9
             // 
-            this.textBox9.Location = new System.Drawing.Point(192, 322);
+            this.textBox9.Location = new System.Drawing.Point(206, 322);
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(100, 20);
             this.textBox9.TabIndex = 12;
@@ -344,16 +354,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Создание шаблона";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // buttonTRY
-            // 
-            this.buttonTRY.Location = new System.Drawing.Point(455, 334);
-            this.buttonTRY.Name = "buttonTRY";
-            this.buttonTRY.Size = new System.Drawing.Size(75, 23);
-            this.buttonTRY.TabIndex = 27;
-            this.buttonTRY.Text = "buttonTRY";
-            this.buttonTRY.UseVisualStyleBackColor = true;
-            this.buttonTRY.Click += new System.EventHandler(this.button4_Click);
             // 
             // Form1
             // 
