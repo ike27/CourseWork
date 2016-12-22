@@ -83,6 +83,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -97,12 +103,16 @@
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1243, 563);
+            this.tabControl1.Size = new System.Drawing.Size(1284, 707);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.tabPage2.Controls.Add(this.listView1);
+            this.tabPage2.Controls.Add(this.textBox12);
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.button5);
             this.tabPage2.Controls.Add(this.button4);
             this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.textBox11);
@@ -147,7 +157,7 @@
             this.tabPage2.Location = new System.Drawing.Point(23, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1216, 555);
+            this.tabPage2.Size = new System.Drawing.Size(1257, 699);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Создание шаблона";
             // 
@@ -156,7 +166,7 @@
             this.button4.BackColor = System.Drawing.Color.CornflowerBlue;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button4.Font = new System.Drawing.Font("Georgia", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button4.Location = new System.Drawing.Point(643, 17);
+            this.button4.Location = new System.Drawing.Point(385, 551);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(37, 35);
             this.button4.TabIndex = 64;
@@ -278,9 +288,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(643, 70);
+            this.richTextBox1.Location = new System.Drawing.Point(647, 16);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(564, 371);
+            this.richTextBox1.Size = new System.Drawing.Size(588, 351);
             this.richTextBox1.TabIndex = 51;
             this.richTextBox1.Text = "";
             this.richTextBox1.ZoomFactor = 0.64F;
@@ -303,7 +313,7 @@
             this.buttonTRY.BackColor = System.Drawing.Color.CornflowerBlue;
             this.buttonTRY.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonTRY.Font = new System.Drawing.Font("Georgia", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonTRY.Location = new System.Drawing.Point(686, 17);
+            this.buttonTRY.Location = new System.Drawing.Point(428, 551);
             this.buttonTRY.Name = "buttonTRY";
             this.buttonTRY.Size = new System.Drawing.Size(200, 35);
             this.buttonTRY.TabIndex = 49;
@@ -606,7 +616,7 @@
             this.tabPage1.Location = new System.Drawing.Point(23, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1162, 555);
+            this.tabPage1.Size = new System.Drawing.Size(1216, 555);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "NULL";
             // 
@@ -742,12 +752,74 @@
             this.label1.Text = "Институт";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button5.Font = new System.Drawing.Font("Georgia", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button5.Location = new System.Drawing.Point(1035, 405);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(200, 35);
+            this.button5.TabIndex = 65;
+            this.button5.Text = "Найти";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Georgia", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label10.Location = new System.Drawing.Point(754, 423);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(60, 18);
+            this.label10.TabIndex = 66;
+            this.label10.Text = "Поиск";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // textBox12
+            // 
+            this.textBox12.BackColor = System.Drawing.Color.MintCream;
+            this.textBox12.Font = new System.Drawing.Font("Georgia", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox12.Location = new System.Drawing.Point(820, 416);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(200, 25);
+            this.textBox12.TabIndex = 67;
+            // 
+            // listView1
+            // 
+            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.listView1.Font = new System.Drawing.Font("Georgia", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listView1.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.listView1.FullRowSelect = true;
+            this.listView1.Location = new System.Drawing.Point(821, 460);
+            this.listView1.MultiSelect = false;
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(414, 200);
+            this.listView1.TabIndex = 68;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Категория поиска";
+            this.columnHeader1.Width = 205;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Результат поиска";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader2.Width = 204;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.ClientSize = new System.Drawing.Size(1243, 564);
+            this.ClientSize = new System.Drawing.Size(1284, 711);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -817,6 +889,12 @@
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }
 

@@ -203,6 +203,107 @@ namespace WordTemplate
             public List<string> adviser_degree = new List<string>();
         }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            List<string> result1 = new List<string>();
+            result1=tdata.institute.Where(t => t.Contains(textBox12.Text)).OrderBy(t=>t).ToList();
+            for (int i = 0; i < result1.Count; i++)
+            {
+                ListViewItem item = new ListViewItem("Институт");
+                item.SubItems.Add(result1[i]);
+                listView1.Items.AddRange(new ListViewItem[] { item });
+            }
+
+            List<string> result2 = new List<string>();
+            result2 = tdata.department.Where(t => t.Contains(textBox12.Text)).OrderBy(t => t).ToList();
+            for (int i = 0; i < result2.Count; i++)
+            {
+                ListViewItem item = new ListViewItem("Кафедра");
+                item.SubItems.Add(result2[i]);
+                listView1.Items.AddRange(new ListViewItem[] { item });
+            }
+
+            List<string> result3 = new List<string>();
+            result3 = tdata.theme.Where(t => t.Contains(textBox12.Text)).OrderBy(t => t).ToList();
+            for (int i = 0; i < result3.Count; i++)
+            {
+                ListViewItem item = new ListViewItem("Тема ВКР");
+                item.SubItems.Add(result3[i]);
+                listView1.Items.AddRange(new ListViewItem[] { item });
+            }
+
+            List<string> result4 = new List<string>();
+            result4 = tdata.code.Where(t => t.Contains(textBox12.Text)).OrderBy(t => t).ToList();
+            for (int i = 0; i < result4.Count; i++)
+            {
+                ListViewItem item = new ListViewItem("Номер направления");
+                item.SubItems.Add(result4[i]);
+                listView1.Items.AddRange(new ListViewItem[] { item });
+            }
+
+            List<string> result5 = new List<string>();
+            result5 = tdata.specialization.Where(t => t.Contains(textBox12.Text)).OrderBy(t => t).ToList();
+            for (int i = 0; i < result5.Count; i++)
+            {
+                ListViewItem item = new ListViewItem("Направление");
+                item.SubItems.Add(result5[i]);
+                listView1.Items.AddRange(new ListViewItem[] { item });
+            }
+
+            List<string> result6 = new List<string>();
+            result6 = tdata.section.Where(t => t.Contains(textBox12.Text)).OrderBy(t => t).ToList();
+            for (int i = 0; i < result6.Count; i++)
+            {
+                ListViewItem item = new ListViewItem("Профиль подготовки");
+                item.SubItems.Add(result6[i]);
+                listView1.Items.AddRange(new ListViewItem[] { item });
+            }
+
+            List<string> result7 = new List<string>();
+            result7 = tdata.student.Where(t => t.Contains(textBox12.Text)).OrderBy(t => t).ToList();
+            for (int i = 0; i < result7.Count; i++)
+            {
+                ListViewItem item = new ListViewItem("ФИО студента");
+                item.SubItems.Add(result7[i]);
+                listView1.Items.AddRange(new ListViewItem[] { item });
+            }
+
+            List<string> result8 = new List<string>();
+            result8 = tdata.head_dep_name.Where(t => t.Contains(textBox12.Text)).OrderBy(t => t).ToList();
+            for (int i = 0; i < result8.Count; i++)
+            {
+                ListViewItem item = new ListViewItem("ФИО завед. кафедрой");
+                item.SubItems.Add(result8[i]);
+                listView1.Items.AddRange(new ListViewItem[] { item });
+            }
+
+            List<string> result9 = new List<string>();
+            result9 = tdata.head_dep_degree.Where(t => t.Contains(textBox12.Text)).OrderBy(t => t).ToList();
+            for (int i = 0; i < result9.Count; i++)
+            {
+                ListViewItem item = new ListViewItem("Научная степень завед. кафедрой");
+                item.SubItems.Add(result9[i]);
+                listView1.Items.AddRange(new ListViewItem[] { item });
+            }
+
+            List<string> result10 = new List<string>();
+            result10 = tdata.adviser_name.Where(t => t.Contains(textBox12.Text)).OrderBy(t => t).ToList();
+            for (int i = 0; i < result10.Count; i++)
+            {
+                ListViewItem item = new ListViewItem("ФИО научного руководителя");
+                item.SubItems.Add(result10[i]);
+                listView1.Items.AddRange(new ListViewItem[] { item });
+            }
+
+            List<string> result11 = new List<string>();
+            result11 = tdata.adviser_degree.Where(t => t.Contains(textBox12.Text)).OrderBy(t => t).ToList();
+            for (int i = 0; i < result11.Count; i++)
+            {
+                ListViewItem item = new ListViewItem("Научная степень науч. руковод.");
+                item.SubItems.Add(result11[i]);
+                listView1.Items.AddRange(new ListViewItem[] { item });
+            }
+        }
     }
 }
 
